@@ -1,0 +1,425 @@
+{
+  "name": "schedule",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "schedule",
+        "formDescription": "​\"Registration form for 3rd-year students only.\"",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name",
+              "placeholder": "your name"
+            },
+            {
+              "fieldLabel": "ID",
+              "fieldType": "number",
+              "placeholder": "Your id"
+            },
+            {
+              "fieldLabel": "Department",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "SWE"
+                  },
+                  {
+                    "option": "CS"
+                  },
+                  {
+                    "option": "CNE"
+                  },
+                  {
+                    "option": "AI"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Email",
+              "placeholder": "Your email"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -1136,
+        272
+      ],
+      "id": "711cb9f2-3c96-40f1-b500-876785945b60",
+      "name": "On form submission",
+      "webhookId": "4b37f444-6c0e-421a-8a9e-cc3b6ba3d2b5"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1zkpmy8dnVvE-nwigO_26HGclr1WKmeKFYVPc7nJiTck",
+          "mode": "list",
+          "cachedResultName": "schedule",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zkpmy8dnVvE-nwigO_26HGclr1WKmeKFYVPc7nJiTck/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zkpmy8dnVvE-nwigO_26HGclr1WKmeKFYVPc7nJiTck/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "NAME": "={{ $json.Name }}",
+            "EMAIL": "={{ $json.Email }}",
+            "       ID": "={{ $json.ID }}",
+            "DEPARTMENT": "={{ $json.Department }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "NAME",
+              "displayName": "NAME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "       ID",
+              "displayName": "       ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DEPARTMENT",
+              "displayName": "DEPARTMENT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -832,
+        288
+      ],
+      "id": "395640c2-cd9d-4baa-af68-3e55578c8c94",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "k2KllNzWCdWRZkeF",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.DEPARTMENT }}",
+                    "rightValue": "SWE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "2c9d0759-7e9c-4d30-8b01-a2a32a28008f"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "88af8ec2-a735-465f-b671-7cad8331265a",
+                    "leftValue": "={{ $json.DEPARTMENT }}",
+                    "rightValue": "AI",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "a66573e4-e6bf-4a81-8d1e-7d589142cd0b",
+                    "leftValue": "={{ $json.DEPARTMENT }}",
+                    "rightValue": "CNE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "94522b12-28d9-4b35-9aea-83cf4beee818",
+                    "leftValue": "={{ $json.DEPARTMENT }}",
+                    "rightValue": "CS",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -512,
+        240
+      ],
+      "id": "d7b5e3b5-1b9c-467a-87d3-1c3080f6879e",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Append row in sheet').item.json.EMAIL }}",
+        "subject": "= dear  {{ $('Append row in sheet').item.json.NAME }} , please find your updated registration schedule",
+        "message": "=Dear {{ $json.NAME }},<br><br>\n\nHere is your Software Engineering Schedule:<br><br>\n\n<table border=\"1\" cellpadding=\"6\" cellspacing=\"0\">\n<tr>\n<th>Day</th>\n<th>Course</th>\n<th>Time</th>\n</tr>\n<tr>\n<td>Sunday</td>\n<td>Software Design</td>\n<td>10:00 AM - 12:00 PM</td>\n</tr>\n<tr>\n<td>Tuesday</td>\n<td>Requirements Engineering</td>\n<td>12:00 PM - 2:00 PM</td>\n</tr>\n<tr>\n<td>Thursday</td>\n<td>Software Testing</td>\n<td>2:00 PM - 4:00 PM</td>\n</tr>\n</table>\n\n<br><br>\nBest regards,<br>\nRegistration Office",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        48,
+        -32
+      ],
+      "id": "c0b6081d-8d1e-409d-9ad1-25b324628198",
+      "name": "Send a message1",
+      "webhookId": "2fee3c3e-be31-46fe-9e0b-a3ad9ef9f048",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nCf08Oi8pGty8Bid",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Append row in sheet').item.json.EMAIL }}",
+        "subject": "= dear {{ $('Append row in sheet').item.json.NAME }} , please find your updated registration schedule",
+        "message": "=Dear {{ $json.Name }},<br><br>  Here is your Artificial Intelligence Schedule:<br><br>  <table border=\"1\" cellpadding=\"6\" cellspacing=\"0\"> <tr> <th>Day</th> <th>Course</th> <th>Time</th> </tr> <tr> <td>Sunday</td> <td>Introduction to AI</td> <td>10:00 AM - 12:00 PM</td> </tr> <tr> <td>Tuesday</td> <td>Machine Learning</td> <td>12:00 PM - 2:00 PM</td> </tr> <tr> <td>Thursday</td> <td>Neural Networks</td> <td>2:00 PM - 4:00 PM</td> </tr> </table><br><br> Best regards,<br> Registration Office",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        48,
+        144
+      ],
+      "id": "47b5e978-8c87-4f76-a934-0a792d5cc602",
+      "name": "Send a message",
+      "webhookId": "467b63a8-8aca-437b-a9d3-6890869ea740",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nCf08Oi8pGty8Bid",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Append row in sheet').item.json.EMAIL }}",
+        "subject": "= dear {{ $('Append row in sheet').item.json.NAME }}  , please find your updated registration schedule",
+        "message": "=Dear {{ $('Append row in sheet').item.json.NAME }} ,<br><br>  Here is your Computer & Network Engineering Schedule:<br><br>  <table border=\"1\" cellpadding=\"6\" cellspacing=\"0\"> <tr> <th>Day</th> <th>Course</th> <th>Time</th> </tr> <tr> <td>Sunday</td> <td>Computer Networks</td> <td>10:00 AM - 12:00 PM</td> </tr> <tr> <td>Tuesday</td> <td>Network Security</td> <td>12:00 PM - 2:00 PM</td> </tr> <tr> <td>Thursday</td> <td>Data Communications</td> <td>2:00 PM - 4:00 PM</td> </tr> </table>  <br><br> Best regards,<br> Registration Office",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        32,
+        288
+      ],
+      "id": "cc54eff0-9682-4bbf-9363-415bdf31ef14",
+      "name": "Send a message2",
+      "webhookId": "75a84f89-f7d3-404b-bf8c-be7af83a9170",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nCf08Oi8pGty8Bid",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.EMAIL }}",
+        "subject": "= dear{{ $json.NAME }}  , please find your updated registration schedule",
+        "message": "=Dear{{ $json.NAME }} ,<br><br>  Here is your Computer Science Schedule:<br><br>  <table border=\"1\" cellpadding=\"6\" cellspacing=\"0\"> <tr> <th>Day</th> <th>Course</th> <th>Time</th> </tr> <tr> <td>Sunday</td> <td>Data Structures</td> <td>10:00 AM - 12:00 PM</td> </tr> <tr> <td>Tuesday</td> <td>Algorithms</td> <td>12:00 PM - 2:00 PM</td> </tr> <tr> <td>Thursday</td> <td>Database Systems</td> <td>2:00 PM - 4:00 PM</td> </tr> </table>  <br><br> Best regards,<br> Registration Office",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        32,
+        416
+      ],
+      "id": "438b6631-f9b7-408d-84c1-bbcf972e11a6",
+      "name": "Send a message3",
+      "webhookId": "ec5ed128-a8a2-4b16-b22e-bcb6e042095d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nCf08Oi8pGty8Bid",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "2cbb9754-b24d-417f-9abd-341ace01c71f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3e92e26487fb455a87b84b0d23a8fcd0cff037de929c0d45a8c7f84fd603d368"
+  },
+  "id": "NgMmrXKyqzoVRlW-GKoTV",
+  "tags": [
+    {
+      "name": "project",
+      "id": "bO4wUg1ulIwG2UKY",
+      "updatedAt": "2026-02-11T07:51:44.233Z",
+      "createdAt": "2026-02-11T07:51:44.233Z"
+    }
+  ]
+}
